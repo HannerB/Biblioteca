@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('libros')" :active="request()->routeIs('libros')">
+                        {{ __('Libros') }}
+                    </x-nav-link>
                     @can('see-reports')
                         <x-nav-link :href="route('reports')" :active="request()->routeIs('reports')">
                             {{ __('Reportes') }}
@@ -95,7 +98,7 @@
             @endcan
             @can('register-attendance')
                 <x-responsive-nav-link :href="route('register-attendance')" :active="request()->routeIs('register-attendance')">
-                    {{ __('Registrar Asistencia') }}
+                    {{ __('Registrar Libro') }}
                 </x-responsive-nav-link>
             @endcan
         </div>

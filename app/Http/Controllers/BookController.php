@@ -17,13 +17,6 @@ class BookController extends Controller
         return view('register-attendance', compact('books'));
     }
 
-    // public function showBooks()
-    // {
-    //     $books = Book::paginate(12); // Obtener libros paginados
-    //     return view('register-attendance', compact('books'));
-    // }
-
-
     /**
      * Show the form for creating a new resource.
      */
@@ -55,7 +48,8 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        $books = Book::paginate(12); // Obtener libros paginados
+        return view('libros', compact('books'));
     }
 
     /**
@@ -110,5 +104,15 @@ class BookController extends Controller
             ->paginate(10);
 
         return view('register-attendance', compact('books'));
+    }
+
+    public function searchBook(Request $request)
+    {
+        $searchTerm = $request->input('search');
+        $books = Book::where('title', 'LIKE', "%{$searchTerm}%")
+            ->orWhere('author', 'LIKE', "%{$searchTerm}%")
+            ->paginate(10);
+
+        return view('book.search-results', compact('books'));
     }
 }

@@ -22,11 +22,15 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('see-reports', fn (User $user) =>
+        Gate::define(
+            'see-reports',
+            fn (User $user) =>
             $user->role == User::ROLE_ADMINISTRATOR
         );
 
-        Gate::define('register-attendance', fn (User $user) =>
+        Gate::define(
+            'register-attendance',
+            fn (User $user) =>
             $user->role == User::ROLE_TEACHER
         );
     }
