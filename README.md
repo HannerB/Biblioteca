@@ -1,20 +1,4 @@
-# Instalación para seguir el [tutorial](https://laraveleando.dev/posts/crea-un-menu-dinamico-con-roles-y-permisos-en-laravel)
-- Clonar el repositorio
 
-```
-git clone git@github.com:javierpomachagua/laraveleando-roles-permisos.git
-```
-
-- Ingresamos a la carpeta
-
-```
-cd laraveleando-roles-permisos
-```
-
-- Nos vamos a la rama starter
-
-```
-git checkout starter
 ```
 
 - Instalamos las librería mediante Composer
