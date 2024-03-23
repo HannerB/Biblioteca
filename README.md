@@ -19,7 +19,7 @@ cp .env.example .env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=laraveleando_roles_permisos
+DB_DATABASE=laravel
 DB_USERNAME=root
 DB_PASSWORD=
 ```
@@ -42,6 +42,4 @@ php artisan migrate --seed
 yarn && yarn dev
 ```
 
-- Nuestra pantalla inicial se verá de la siguiente manera
 
-<img width="1275" alt="image" src="https://user-images.githubusercontent.com/7298734/235327339-eedfb923-bb84-4824-afd2-58ff324098d8.png">
