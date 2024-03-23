@@ -13,15 +13,15 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::paginate(10); // Obtener libros paginados
+        $books = Book::paginate(12); // Obtener libros paginados
         return view('register-attendance', compact('books'));
     }
     
-    public function showBooks()
-    {
-        $books = Book::paginate(10); // Obtener libros paginados
-        return view('register-attendance', compact('books'));
-    }
+    // public function showBooks()
+    // {
+    //     $books = Book::paginate(12); // Obtener libros paginados
+    //     return view('register-attendance', compact('books'));
+    // }
     
 
     /**
@@ -81,4 +81,15 @@ class BookController extends Controller
     {
         //
     }
+
+    public function search(Request $request)
+{
+    $searchTerm = $request->input('search');
+    $books = Book::where('title', 'LIKE', "%{$searchTerm}%")
+                 ->orWhere('author', 'LIKE', "%{$searchTerm}%")
+                 ->paginate(10);
+
+    return view('register-attendance', compact('books'));
+}
+
 }

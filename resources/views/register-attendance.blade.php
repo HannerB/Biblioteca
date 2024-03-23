@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Registrar Libro') }}
+            {{ __('Inventario') }}
         </h2>
     </x-slot>
 
@@ -14,6 +14,15 @@
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Agregar Libro</a>
                 </div>
 
+                <!-- Formulario de búsqueda -->
+                <div class="p-4 flex justify-end">
+                    <form action="{{ route('book.search') }}" method="GET" class="flex">
+                        <input type="text" name="search" placeholder="Buscar libros..." class="form-input rounded-l-md">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-md">Buscar</button>
+                    </form>
+                </div>
+
+                <!-- Listado de libros -->
                 <div class="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     @forelse ($books as $item)
                         <!-- Tarjeta de Ejemplo -->
@@ -46,115 +55,3 @@
         </div>
     </div>
 </x-app-layout>
-
-
-
-
-
-{{-- <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Registrar Libro') }}
-        </h2>
-    </x-slot>
-
-    
-
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <h3 class="text-lg font-bold mb-4">Libros</h3>
-                    <div class="flex justify-between mb-4">
-                        <a href="{{ route('book.create') }}"
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Agregar
-                            Libro</a>
-                    </div>
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead>
-                            <tr>
-                                <th
-                                    class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Libro
-                                </th>
-                                <th
-                                    class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Autor
-                                </th>
-                                <th
-                                    class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Cantidad de Libros
-                                </th>
-                                <th
-                                    class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Acciones
-                                </th>
-                                <!-- Añade más encabezados según sea necesario -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($books as $item)
-                                <tr class="bg-white">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $item -> title }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dato 2</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Dato 3</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <!-- Botón de Editar con más separación -->
-                                        <a href="{{ route('register-attendance') }}"
-                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-6">Editar</a>
-                                        <!-- Botón de Eliminar -->
-                                        <a href="{{ route('register-attendance') }}"
-                                            class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Eliminar</a>
-                                    </td>
-                                    <!-- Añade más datos según sea necesario -->
-                                </tr>
-                            @empty
-                            @endforelse
-
-                            <!-- Añade más filas según sea necesario -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout>
-
-
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Registrar Libro') }}
-        </h2>
-    </x-slot>
-
-
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="overflow-hidden shadow-sm sm:rounded-lg">
-                <ul class="divide-y divide-gray-200">
-                    <!-- Item de Ejemplo -->
-                    <li class="py-4 px-6 flex justify-between items-center">
-                        <div>
-                            <h3 class="font-semibold text-lg mb-1">Nombre del Libro</h3>
-                            <p class="text-gray-700">Autor: Nombre del Autor</p>
-                            <p class="text-gray-700">Cantidad: 5</p>
-                        </div>
-                        <div>
-                            <a href="#"
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Editar</a>
-                            <a href="#"
-                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2">Eliminar</a>
-                        </div>
-                    </li>
-                    <!-- Repite este item para cada libro -->
-                </ul>
-            </div>
-        </div>
-    </div>
-</x-app-layout> --}}
-
-

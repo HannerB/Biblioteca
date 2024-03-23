@@ -18,7 +18,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('book', BookController::class);
 
     // Ruta para mostrar los libros en la vista de asistencia
-    Route::get('register-attendance', [BookController::class, 'showBooks'])->name('register-attendance');
+    Route::get('register-attendance', [BookController::class, 'index'])->name('register-attendance');
+
+    Route::get('/books/search', [BookController::class, 'search'])->name('book.search');
+
 });
 
 Route::get('/dashboard', function () {
@@ -29,11 +32,5 @@ Route::get('reports', function () {
     Gate::authorize('see-reports');
     return view('reports');
 })->name('reports');
-
-// No necesitas definir esta ruta dos veces
-// Route::get('register-attendance', function () {
-//     Gate::authorize('register-attendance');
-//     return view('register-attendance');
-// })->name('register-attendance');
 
 require __DIR__.'/auth.php';
