@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -97,14 +98,21 @@ class BookController extends Controller
     }
 
     public function search(Request $request)
-    {
-        $searchTerm = $request->input('search');
-        $books = Book::where('title', 'LIKE', "%{$searchTerm}%")
-            ->orWhere('author', 'LIKE', "%{$searchTerm}%")
-            ->paginate(10);
-
-        return view('register-attendance', compact('books'));
+{
+    // Verificar el rol del usuario
+    if (auth()->user()->role == User::ROLE_STUDENT) {
+        // Redirigir al usuario a una página de acceso denegado
+        abort(403, 'No tienes permiso para acceder a esta página.');
     }
+
+    $searchTerm = $request->input('search');
+    $books = Book::where('title', 'LIKE', "%{$searchTerm}%")
+        ->orWhere('author', 'LIKE', "%{$searchTerm}%")
+        ->paginate(10);
+
+    return view('register-attendance', compact('books'));
+}
+
 
     public function searchBook(Request $request)
     {

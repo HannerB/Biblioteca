@@ -19,12 +19,10 @@ Route::middleware(['auth'])->group(function () {
 
     // Rutas para los libros
     Route::resource('book', BookController::class)->except('index'); // Excluir la ruta 'index'
-    
+
     Route::get('/books/search', [BookController::class, 'search'])->name('book.search');
 
     Route::get('/books/rol', [BookController::class, 'searchBook'])->name('book.searchBook');
-
-
 });
 
 // Ruta para mostrar los libros en la vista de asistencia (fuera del grupo de rutas protegidas)
@@ -48,4 +46,4 @@ Route::get('reports', function () {
     return view('reports');
 })->name('reports');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
