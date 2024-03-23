@@ -25,8 +25,12 @@
                                     <p class="text-gray-700">Cantidad: {{ $book->quantity }}</p>
                                     <p class="text-gray-700">Género: Ficción</p>
                                     <div class="mt-4 flex justify-end space-x-4">
-                                        <a href""
-                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Llevar</a>
+                                        @if ($userRole == \App\Models\User::ROLE_STUDENT)
+                                        <div class="mt-4 flex justify-end space-x-4">
+                                            <a href="#"
+                                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Llevar</a>
+                                        </div>
+                                    @endif
                                     </div>
                                 </div>
                             </div>

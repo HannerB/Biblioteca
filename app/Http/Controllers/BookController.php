@@ -6,6 +6,8 @@ use App\Models\Book;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+
 
 class BookController extends Controller
 {
@@ -47,10 +49,11 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Book $book)
+    public function show()
     {
-        $books = Book::paginate(12); // Obtener libros paginados
-        return view('libros', compact('books'));
+        $books = Book::paginate(12);
+        $userRole = Auth::user()->role;
+        return view('libros', compact('books', 'userRole'));
     }
 
     /**
@@ -90,37 +93,38 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        $book->delete(); 
+        $book->delete();
 
         Session::flash('mensaje', 'Se ha eliminado con Éxito!');
-        
+
         return redirect()->route('register-attendance');
     }
 
     public function search(Request $request)
-{
-    // Verificar el rol del usuario
-    if (auth()->user()->role == User::ROLE_STUDENT) {
-        // Redirigir al usuario a una página de acceso denegado
-        abort(403, 'No tienes permiso para acceder a esta página.');
+    {
+        // Verificar el rol del usuario
+        if (auth()->user()->role == User::ROLE_STUDENT) {
+            // Redirigir al usuario a una página de acceso denegado
+            abort(403, 'No tienes permiso para acceder a esta página.');
+        }
+
+        $searchTerm = $request->input('search');
+        $books = Book::where('title', 'LIKE', "%{$searchTerm}%")
+            ->orWhere('author', 'LIKE', "%{$searchTerm}%")
+            ->paginate(12);
+
+        return view('register-attendance', compact('books'));
     }
-
-    $searchTerm = $request->input('search');
-    $books = Book::where('title', 'LIKE', "%{$searchTerm}%")
-        ->orWhere('author', 'LIKE', "%{$searchTerm}%")
-        ->paginate(10);
-
-    return view('register-attendance', compact('books'));
-}
 
 
     public function searchBook(Request $request)
     {
         $searchTerm = $request->input('search');
+        $userRole = Auth::user()->role;
         $books = Book::where('title', 'LIKE', "%{$searchTerm}%")
             ->orWhere('author', 'LIKE', "%{$searchTerm}%")
-            ->paginate(10);
+            ->paginate(12);
 
-        return view('book.search-results', compact('books'));
+        return view('book.search-results', compact('books', 'searchTerm', 'userRole'));
     }
 }
