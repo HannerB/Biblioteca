@@ -30,6 +30,11 @@
                             {{ __('Registro de Libros') }}
                         </x-nav-link>
                     @endcan
+                    @can('register-category')
+                        <x-nav-link :href="route('register-attendance')" :active="request()->routeIs('register-attendance')">
+                            {{ __('Registro de Categorias') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
