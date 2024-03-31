@@ -1,13 +1,12 @@
 <x-app-layout>
     <div class="max-w-md mx-auto mt-8">
-
         @if (isset($book))
             <form method="POST" action="{{ route('book.update', $book) }}"
                 class="border border-gray-300 rounded-md p-6 shadow">
                 @method('PUT')
-            @else
-                <form method="POST"
-                    action="{{ route('book.store') }}"class="border border-gray-300 rounded-md p-6 shadow">
+        @else
+            <form method="POST" action="{{ route('book.store') }}"
+                class="border border-gray-300 rounded-md p-6 shadow">
         @endif
         @csrf
 
@@ -41,10 +40,20 @@
             @enderror
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <button type="submit"
-                class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">{{ __('Guardar') }}</button>
+        <!-- Nuevo select para categorías -->
+        <div class="mb-4">
+            <label for="category" class="block font-medium text-sm text-gray-700">Categoría</label>
+            <select name="category" id="category" class="block mt-1 w-full form-select rounded-lg">
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
         </div>
-        </form>
+
+        <div class="flex items-center justify-end mt-4">
+            <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">{{ __('Guardar') }}</button>
+        </div>
+        </form> <!-- Agregada etiqueta de cierre del formulario -->
     </div>
 </x-app-layout>
+
