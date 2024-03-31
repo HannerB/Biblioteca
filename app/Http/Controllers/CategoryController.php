@@ -8,75 +8,53 @@ use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $categories = Category::paginate(12); // Obtener categorías paginadas
+        $categories = Category::paginate(12);
         return view('register-categories', compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('category.form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|max:30|unique:categories'
         ]);
 
-        $category = Category::create($request->only('name'));
+        Category::create($request->only('name'));
 
         Session::flash('mensaje', 'Se ha guardado con éxito!');
 
         return redirect()->route('register-categories');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Category $category)
     {
         return view('category.show', compact('category'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Category $category)
     {
         return view('category.form', compact('category'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Category $category)
     {
         $request->validate([
             'name' => 'required|max:30|unique:categories,name,' . $category->id
         ]);
 
-        $category->name = $request['name'];
-        $category->save();
+        $category->update($request->only('name'));
 
         Session::flash('mensaje', 'Se ha actualizado con éxito!');
 
         return redirect()->route('register-categories');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Category $category)
     {
         $category->delete();

@@ -15,21 +15,21 @@ class DatabaseSeeder extends Seeder
     {
         User::factory()
             ->state([
-                'email' => 'administrador@laraveleando.com'
+                'email' => 'admin@g'
             ])
             ->administrator()
             ->create();
 
         User::factory()
             ->state([
-                'email' => 'profesor@laraveleando.com'
+                'email' => 'profesor@g'
             ])
             ->teacher()
             ->create();
 
         User::factory()
             ->state([
-                'email' => 'estudiante@laraveleando.com'
+                'email' => 'estudiante@g'
             ])
             ->student()
             ->create();

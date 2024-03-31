@@ -7,6 +7,10 @@ use App\Models\Book;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Route::middleware(['auth'])->group(function () {
     // Rutas para el perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
