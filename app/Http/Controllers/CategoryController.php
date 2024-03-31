@@ -14,7 +14,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::paginate(12); // Obtener categorías paginadas
-        return view('category.index', compact('categories'));
+        return view('register-categories', compact('categories'));
     }
 
     /**
@@ -22,7 +22,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create');
+        return view('category.form');
     }
 
     /**
@@ -38,7 +38,7 @@ class CategoryController extends Controller
 
         Session::flash('mensaje', 'Se ha guardado con éxito!');
 
-        return redirect()->route('categories.index');
+        return redirect()->route('register-categories');
     }
 
     /**
@@ -54,7 +54,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('category.edit', compact('category'));
+        return view('category.form', compact('category'));
     }
 
     /**
@@ -71,7 +71,7 @@ class CategoryController extends Controller
 
         Session::flash('mensaje', 'Se ha actualizado con éxito!');
 
-        return redirect()->route('categories.index');
+        return redirect()->route('register-categories');
     }
 
     /**
@@ -83,6 +83,6 @@ class CategoryController extends Controller
 
         Session::flash('mensaje', 'Se ha eliminado con éxito!');
 
-        return redirect()->route('categories.index');
+        return redirect()->route('register-categories');
     }
 }
