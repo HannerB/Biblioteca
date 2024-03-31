@@ -9,6 +9,8 @@ class Loan extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['user_id'];
+
     /**
      * Define the relationship between Loan and User models.
      *

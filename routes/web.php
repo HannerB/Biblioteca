@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\LoanController;
 use App\Models\Book;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
@@ -18,16 +19,21 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Rutas para los libros
-    Route::resource('book', BookController::class)->except('index'); // Excluir la ruta 'index'
+    Route::resource('books', BookController::class)->except('index'); // Cambiar 'book' a 'books'
     Route::get('/books/search', [BookController::class, 'search'])->name('book.search');
     Route::get('/books/rol', [BookController::class, 'searchBook'])->name('book.searchBook');
 
     // Rutas para las categorías
-    Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
-    Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
-    Route::get('/category/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
-    Route::put('/category/{category}', [CategoryController::class, 'update'])->name('category.update');
-    Route::delete('/category/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('category.create'); // Cambiar 'category' a 'categories'
+    Route::post('/categories', [CategoryController::class, 'store'])->name('category.store'); // Cambiar 'category' a 'categories'
+    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit'); // Cambiar 'category' a 'categories'
+    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('category.update'); // Cambiar 'category' a 'categories'
+    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('category.destroy'); // Cambiar 'category' a 'categories'
+
+    // Rutas para los préstamos
+    Route::get('/books', [LoanController::class, 'showAvailableBooks'])->name('books.index'); // Cambiar el nombre de la ruta
+    Route::get('/books/{book}/loan', [LoanController::class, 'showLoanForm'])->name('books.loan');
+    Route::post('/books/{book}/loan', [LoanController::class, 'submitLoanRequest'])->name('books.submit_loan');
 });
 
 // Ruta para mostrar los libros en la vista de asistencia (fuera del grupo de rutas protegidas)

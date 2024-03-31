@@ -11,16 +11,13 @@ class Book extends Model
     
     protected $fillable = ['title', 'author', 'quantity'];
 
-    /**
-     * Define the relationship between Book and Loan models.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
+    // Relación con la tabla loans
     public function loans()
     {
         return $this->hasMany(Loan::class);
     }
 
+    // Relación con la tabla categories
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'book_category');
