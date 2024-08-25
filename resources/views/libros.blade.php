@@ -17,7 +17,6 @@
                         <button type="submit"
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-md">Buscar</button>
                     </form>
-
                 </div>
 
                 <!-- Listado de libros -->
@@ -31,15 +30,19 @@
                                 <h3 class="font-semibold text-lg mb-2">{{ $item->title }}</h3>
                                 <p class="text-gray-700">Autor: {{ $item->author }}</p>
                                 <p class="text-gray-700">Cantidad: {{ $item->quantity }}</p>
-                                <p class="text-gray-700">Género: Ficción</p>
+                                <p class="text-gray-700">Categoría:
+                                    @foreach ($item->categories as $category)
+                                        {{ $category->name }}@if (!$loop->last), @endif
+                                    @endforeach
+                                </p>
                                 <div class="mt-4 flex justify-end space-x-4">
                                     @if ($userRole == \App\Models\User::ROLE_STUDENT)
-                                    <div class="mt-4 flex justify-end space-x-4">
-                                        <a href="#"
-                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Llevar</a>
-                                    </div>
-                                @endif
-                                
+                                        <form action="{{ route('books.loan', $item->id) }}" method="GET">
+                                            @csrf
+                                            <button type="submit"
+                                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Llevar</button>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -47,6 +50,7 @@
                         <p>No hay libros disponibles.</p>
                     @endforelse
                 </div>
+                
 
                 <!-- Paginador -->
                 <div class="p-4">

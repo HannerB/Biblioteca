@@ -5,7 +5,7 @@
                 class="border border-gray-300 rounded-md p-6 shadow">
                 @method('PUT')
         @else
-            <form method="POST" action="{{ route('book.store') }}"
+            <form method="POST" action="{{ route('books.store') }}"
                 class="border border-gray-300 rounded-md p-6 shadow">
         @endif
         @csrf

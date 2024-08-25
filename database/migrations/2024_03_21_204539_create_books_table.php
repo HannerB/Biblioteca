@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('author');
             $table->integer('quantity')->default(0);
+            $table->integer('quantity_available')->default(0); // Nuevo campo
             $table->timestamps();
         });
 
@@ -45,3 +46,4 @@ return new class extends Migration
         Schema::dropIfExists('categories');
     }
 };
+

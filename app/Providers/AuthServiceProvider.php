@@ -39,5 +39,11 @@ class AuthServiceProvider extends ServiceProvider
             fn (User $user) =>
             $user->role == User::ROLE_TEACHER
         );
+
+        Gate::define(
+            'book-return',
+            fn (User $user) =>
+            $user->role == User::ROLE_STUDENT
+        );
     }
 }

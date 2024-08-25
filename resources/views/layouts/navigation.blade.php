@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('libros')" :active="request()->routeIs('libros')">
                         {{ __('Libros') }}
                     </x-nav-link>
+                    {{-- <x-nav-link :href="route('book.return')" :active="request()->routeIs('book.return')">
+                        {{ __('Devolver Libro') }}
+                    </x-nav-link> --}}
                     @can('see-reports')
                         <x-nav-link :href="route('reports')" :active="request()->routeIs('reports')">
                             {{ __('Reportes') }}

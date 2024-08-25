@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
 use App\Models\User;
+use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -25,21 +25,20 @@ class BookController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'title' => 'required|max:30',
             'author' => 'required|max:30',
             'quantity' => 'required|numeric',
             'category' => 'nullable|exists:categories,id',
         ]);
 
-        $bookData = $request->only('title', 'author', 'quantity');
-        $book = Book::create($bookData);
+        $book = Book::create($validatedData);
 
         if ($request->has('category')) {
             $book->categories()->attach($request->input('category'));
         }
 
-        Session::flash('mensaje', 'Libro creado con éxito!');
+        Session::flash('success', 'Libro creado con éxito!');
         return redirect()->route('register-attendance');
     }
 
@@ -58,29 +57,25 @@ class BookController extends Controller
 
     public function update(Request $request, Book $book)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'title' => 'required|max:30',
             'author' => 'required|max:30',
             'quantity' => 'required|numeric',
             'category' => 'nullable|exists:categories,id',
         ]);
 
-        $book->update($request->only('title', 'author', 'quantity'));
+        $book->update($validatedData);
 
-        if ($request->has('category')) {
-            $book->categories()->sync([$request->input('category')]);
-        } else {
-            $book->categories()->detach();
-        }
+        $book->categories()->sync($request->input('category', []));
 
-        Session::flash('mensaje', 'Libro actualizado con éxito!');
+        Session::flash('success', 'Libro actualizado con éxito!');
         return redirect()->route('register-attendance');
     }
 
     public function destroy(Book $book)
     {
         $book->delete();
-        Session::flash('mensaje', 'Se ha eliminado con Éxito!');
+        Session::flash('success', 'Se ha eliminado con éxito!');
         return redirect()->route('register-attendance');
     }
 
