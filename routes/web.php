@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -19,7 +19,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Rutas para los libros
-    Route::resource('books', BookController::class)->except('index'); // Cambiar 'book' a 'books'
+    Route::resource('books', BookController::class)->except('index');
     Route::get('/books/search', [BookController::class, 'search'])->name('book.search');
     Route::get('/books/rol', [BookController::class, 'searchBook'])->name('book.searchBook');
 
@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('category.destroy'); // Cambiar 'category' a 'categories'
 
     // Rutas para los préstamos
-    Route::get('/books', [LoanController::class, 'showAvailableBooks'])->name('books.index'); // Cambiar el nombre de la ruta
+    // Route::get('/books', [LoanController::class, 'showLoanBooks'])->name('books.index'); // Cambiar el nombre de la ruta
     Route::get('/books/{book}/loan', [LoanController::class, 'showLoanForm'])->name('books.loan');
     Route::post('/books/{book}/loan', [LoanController::class, 'submitLoanRequest'])->name('books.submit_loan');
 });

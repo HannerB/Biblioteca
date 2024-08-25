@@ -7,11 +7,25 @@
 
     <!-- Mostrar mensaje de éxito si está presente -->
     @if (session()->has('success'))
-    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-4 mx-auto max-w-7xl">
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
         <strong class="font-bold">Éxito!</strong>
         <span class="block sm:inline">{{ session('success') }}</span>
         <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
             <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <title>Close</title>
+                <path fill-rule="evenodd" d="M14.95 5.364a1.25 1.25 0 0 0-1.768 1.768L10 10.768l-3.182-3.182a1.25 1.25 0 1 0-1.768 1.768L8.232 12l-3.182 3.182a1.25 1.25 0 1 0 1.768 1.768L10 13.232l3.182 3.182a1.25 1.25 0 1 0 1.768-1.768L11.768 12l3.182-3.182a1.25 1.25 0 0 0 0-1.768z" clip-rule="evenodd" />
+            </svg>
+        </span>
+    </div>
+    @endif
+
+    <!-- Mostrar mensaje de error si está presente -->
+    @if (session()->has('error'))
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold">Error!</strong>
+        <span class="block sm:inline">{{ session('error') }}</span>
+        <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+            <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                 <title>Close</title>
                 <path fill-rule="evenodd" d="M14.95 5.364a1.25 1.25 0 0 0-1.768 1.768L10 10.768l-3.182-3.182a1.25 1.25 0 1 0-1.768 1.768L8.232 12l-3.182 3.182a1.25 1.25 0 1 0 1.768 1.768L10 13.232l3.182 3.182a1.25 1.25 0 1 0 1.768-1.768L11.768 12l3.182-3.182a1.25 1.25 0 0 0 0-1.768z" clip-rule="evenodd" />
             </svg>
